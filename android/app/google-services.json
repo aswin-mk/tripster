@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "801843521447",
+    "project_id": "tripster-gecw5",
+    "storage_bucket": "tripster-gecw5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801843521447:android:5a86d095994e2bbc2c7882",
+        "android_client_info": {
+          "package_name": "com.example.tripster"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxp5hcOsg5jQeVKAX35QxQ-A6JiHLF7gQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
