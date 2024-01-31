@@ -1,14 +1,14 @@
-// login.dart
+// signup.dart
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SignupPage extends StatefulWidget {
+  const SignupPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignupPageState createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignupPageState extends State<SignupPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -100,9 +100,9 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
-                  // TODO: implement sign in logic
+                  // TODO: implement sign up logic
                 },
-                child: const Text('Sign in'),
+                child: const Text('Sign up'),
                 style: ElevatedButton.styleFrom(
                   primary: const Color(0xFFF5E9C9),
                   shape: RoundedRectangleBorder(
@@ -112,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 16.0),
               const Text(
-                'Or sign in with',
+                'Or sign up with',
                 style: TextStyle(color: Colors.white),
               ),
               const SizedBox(height: 16.0),
@@ -121,21 +121,21 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      // TODO: implement sign in with Google
+                      // TODO: implement sign up with Google
                     },
                     icon: const Icon(Icons.g_mobiledata),
                     color: Colors.white,
                   ),
                   IconButton(
                     onPressed: () {
-                      // TODO: implement sign in with Apple
+                      // TODO: implement sign up with Apple
                     },
                     icon: const Icon(Icons.apple),
                     color: Colors.white,
                   ),
                   IconButton(
                     onPressed: () {
-                      // TODO: implement sign in with Facebook
+                      // TODO: implement sign up with Facebook
                     },
                     icon: const Icon(Icons.facebook),
                     color: Colors.white,
@@ -147,16 +147,16 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Don\'t have an account?',
+                    'Already have an account?',
                     style: TextStyle(color: Colors.white),
                   ),
                   TextButton(
                     onPressed: () {
-                      // TODO: implement sign up logic
-                      Navigator.pushNamed(context, '/signup');
+                      // TODO: navigate to login page
+                      Navigator.pop(context);
                     },
                     child: const Text(
-                      'Sign up',
+                      'Login',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
