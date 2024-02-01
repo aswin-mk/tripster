@@ -1,5 +1,6 @@
 // login.dart
 import 'package:flutter/material.dart';
+import 'package:tripster/sevices/signin.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -100,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
-                  // TODO: implement sign in logic
+                  signin(context,_emailController.text, _passwordController.text);
                 },
                 child: const Text('Sign in'),
                 style: ElevatedButton.styleFrom(
