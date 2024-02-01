@@ -15,7 +15,7 @@ void signin(BuildContext context, String email, String password) async {
     User? user = userCredential.user;
     if (user != null) {
       // Navigate to home screen or other relevant screen
-      Navigator.pushNamed(context, '/signup');
+      Navigator.pushNamed(context, '/homepage');
     }
   } on FirebaseAuthException catch (e) {
     // Handle sign-in errors
