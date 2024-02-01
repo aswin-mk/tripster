@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       home: const Authcheck(),
       routes: {
         '/signup': (context) => const SignupPage(),
-        '/homepage':(context) => const HomePage(),
+        '/homepage':(context) => HomePage(),
       },
     );
   }
