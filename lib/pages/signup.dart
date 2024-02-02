@@ -1,16 +1,61 @@
 // signup.dart
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignupPage extends StatefulWidget {
-  const SignupPage({Key? key}) : super(key: key);
+  const SignupPage({super.key});
 
   @override
   _SignupPageState createState() => _SignupPageState();
 }
 
 class _SignupPageState extends State<SignupPage> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _signUp() async {
+    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+      // Get email and password values
+      final email = _emailController.text;
+      final password = _passwordController.text;
+
+      try {
+        // Sign up the user
+        final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+
+        // Handle successful signup (e.g., navigate to home page)
+        print('Signed up successfully with UID: ${userCredential.user!.uid}');
+        Navigator.pushNamed(context, '/HomePage');
+
+        // Consider:
+        // - Implement email verification for enhanced security
+        // - Store additional user information in a database
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          print('The password provided is too weak.');
+        } else if (e.code == 'email-already-in-use') {
+          print('The account already exists for that email.');
+        } else {
+          print('Signup failed with code: ${e.code}');
+        }
+      } catch (e) {
+        print('An error occurred: $e');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +101,13 @@ class _SignupPageState extends State<SignupPage> {
               TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Email',
-                  labelStyle: const TextStyle(color: Colors.white),
-                  enabledBorder: const UnderlineInputBorder(
+                  labelStyle: TextStyle(color: Colors.white),
+                  enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
                   ),
-                  focusedBorder: const UnderlineInputBorder(
+                  focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
                   ),
                 ),
@@ -72,13 +117,13 @@ class _SignupPageState extends State<SignupPage> {
               TextField(
                 controller: _passwordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Password',
-                  labelStyle: const TextStyle(color: Colors.white),
-                  enabledBorder: const UnderlineInputBorder(
+                  labelStyle: TextStyle(color: Colors.white),
+                  enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
                   ),
-                  focusedBorder: const UnderlineInputBorder(
+                  focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
                   ),
                 ),
@@ -99,16 +144,14 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
-                onPressed: () {
-                  // TODO: implement sign up logic
-                },
-                child: const Text('Sign up'),
+                onPressed: _signUp,
                 style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFFF5E9C9),
+                  backgroundColor: const Color(0xFFF5E9C9),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
+                child: const Text('Sign up'),
               ),
               const SizedBox(height: 16.0),
               const Text(

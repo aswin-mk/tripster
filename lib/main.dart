@@ -1,14 +1,23 @@
 // main.dart
 import 'package:flutter/material.dart';
-import 'login.dart';
-import 'signup.dart';
+import 'package:tripster/pages/HomePage.dart';
+import 'package:tripster/services/auth_check.dart';
+import 'pages/signup.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // This is important
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
+
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   static const String _title = 'Tripster';
 
@@ -19,9 +28,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: const LoginPage(),
+      home: const Authcheck(),
       routes: {
         '/signup': (context) => const SignupPage(),
+        '/homepage':(context) => HomePage(),
       },
     );
   }
