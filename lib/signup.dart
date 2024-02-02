@@ -119,27 +119,9 @@ class _SignupPageState extends State<SignupPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  IconButton(
-                    onPressed: () {
-                      // TODO: implement sign up with Google
-                    },
-                    icon: const Icon(Icons.g_mobiledata),
-                    color: Colors.white,
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      // TODO: implement sign up with Apple
-                    },
-                    icon: const Icon(Icons.apple),
-                    color: Colors.white,
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      // TODO: implement sign up with Facebook
-                    },
-                    icon: const Icon(Icons.facebook),
-                    color: Colors.white,
-                  ),
+                  _buildSocialIconButton(Icons.g_mobiledata),
+                  _buildSocialIconButton(Icons.apple),
+                  _buildSocialIconButton(Icons.facebook),
                 ],
               ),
               const SizedBox(height: 16.0),
@@ -165,6 +147,24 @@ class _SignupPageState extends State<SignupPage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildSocialIconButton(IconData icon) {
+    return Container(
+      width: 60, // Adjust the width as needed
+      height: 60, // Adjust the height as needed
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(245, 233, 201, 1),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: IconButton(
+        onPressed: () {
+          // TODO: implement sign up
+        },
+        icon: Icon(icon),
+        color: Colors.white,
       ),
     );
   }

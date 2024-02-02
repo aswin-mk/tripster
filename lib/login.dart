@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 child: const Text('Sign in'),
                 style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFFF5E9C9),
+                  primary: Color.fromRGBO(245, 233, 201, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -119,27 +119,9 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  IconButton(
-                    onPressed: () {
-                      // TODO: implement sign in with Google
-                    },
-                    icon: const Icon(Icons.g_mobiledata),
-                    color: Colors.white,
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      // TODO: implement sign in with Apple
-                    },
-                    icon: const Icon(Icons.apple),
-                    color: Colors.white,
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      // TODO: implement sign in with Facebook
-                    },
-                    icon: const Icon(Icons.facebook),
-                    color: Colors.white,
-                  ),
+                  _buildSocialIconButton(Icons.g_mobiledata),
+                  _buildSocialIconButton(Icons.apple),
+                  _buildSocialIconButton(Icons.facebook),
                 ],
               ),
               const SizedBox(height: 16.0),
@@ -165,6 +147,24 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildSocialIconButton(IconData icon) {
+    return Container(
+      width: 60, // Adjust the width as needed
+      height: 60, // Adjust the height as needed
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(245, 233, 201, 1),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: IconButton(
+        onPressed: () {
+          // TODO: implement sign in
+        },
+        icon: Icon(icon),
+        color: Colors.white,
       ),
     );
   }
