@@ -25,9 +25,19 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Text(
-          "Welcome to the Home Page!\nLogged in as ${user?.email ?? 'Guest'}",
-        ),
+        child: TextField(
+          autofocus: false,
+          showCursor: false,
+          decoration: InputDecoration(
+            hintText: 'Find Your Destination',
+            hintStyle: const TextStyle(
+              fontWeight: FontWeight.w500,fontSize: 24
+            ),
+            filled: true,
+            fillColor: Colors.grey[200],
+            border: InputBorder.none
+          ),
+        )
       ),
     );
   }

@@ -49,7 +49,19 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        dexOptions {
+        jumboMode = true
+        }
+
+        multiDexEnabled true
+
     }
+    
+    dependencies {
+        implementation 'androidx.multidex:multidex:2.0.1'
+    }
+
 
     buildTypes {
         release {
