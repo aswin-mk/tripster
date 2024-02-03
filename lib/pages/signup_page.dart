@@ -199,7 +199,7 @@ class _SignupPageState extends State<SignupPage> {
       width: 60, // Adjust the width as needed
       height: 60, // Adjust the height as needed
       decoration: BoxDecoration(
-        color: Color.fromRGBO(245, 233, 201, 1),
+        color: const Color.fromRGBO(245, 233, 201, 1),
         borderRadius: BorderRadius.circular(10),
       ),
       child: IconButton(

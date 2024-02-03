@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
               ),
               onChanged: (value){
                 if (_debounce?.isActive ?? false) _debounce!.cancel();
-                _debounce=Timer(Duration(milliseconds: 1000), () {
+                _debounce=Timer(const Duration(milliseconds: 1000), () {
                   if (value.isNotEmpty){
                   autocompleteSearch(value);
                  }

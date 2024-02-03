@@ -1,8 +1,8 @@
 // main.dart
 import 'package:flutter/material.dart';
-import 'package:tripster/pages/HomePage.dart';
+import 'package:tripster/pages/home_page.dart';
 import 'package:tripster/services/auth_check.dart';
-import 'pages/signup.dart';
+import 'pages/signup_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       home: const Authcheck(),
       routes: {
         '/signup': (context) => const SignupPage(),
-        '/homepage':(context) => HomePage(),
+        '/homepage':(context) => const HomePage(),
       },
     );
   }

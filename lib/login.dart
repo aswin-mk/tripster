@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -56,13 +56,13 @@ class _LoginPageState extends State<LoginPage> {
               TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Email',
-                  labelStyle: const TextStyle(color: Colors.white),
-                  enabledBorder: const UnderlineInputBorder(
+                  labelStyle: TextStyle(color: Colors.white),
+                  enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
                   ),
-                  focusedBorder: const UnderlineInputBorder(
+                  focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
                   ),
                 ),
@@ -72,13 +72,13 @@ class _LoginPageState extends State<LoginPage> {
               TextField(
                 controller: _passwordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Password',
-                  labelStyle: const TextStyle(color: Colors.white),
-                  enabledBorder: const UnderlineInputBorder(
+                  labelStyle: TextStyle(color: Colors.white),
+                  enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
                   ),
-                  focusedBorder: const UnderlineInputBorder(
+                  focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
                   ),
                 ),
@@ -102,13 +102,13 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   // TODO: implement sign in logic
                 },
-                child: const Text('Sign in'),
                 style: ElevatedButton.styleFrom(
-                  primary: Color.fromRGBO(245, 233, 201, 1),
+                  backgroundColor: const Color.fromRGBO(245, 233, 201, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
+                child: const Text('Sign in'),
               ),
               const SizedBox(height: 16.0),
               const Text(
@@ -156,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
       width: 60, // Adjust the width as needed
       height: 60, // Adjust the height as needed
       decoration: BoxDecoration(
-        color: Color.fromRGBO(245, 233, 201, 1),
+        color: const Color.fromRGBO(245, 233, 201, 1),
         borderRadius: BorderRadius.circular(10),
       ),
       child: IconButton(
