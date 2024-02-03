@@ -1,7 +1,7 @@
 // main.dart
 import 'package:flutter/material.dart';
 import 'package:tripster/pages/home_page.dart';
-import 'package:tripster/services/auth_check.dart';
+import 'package:tripster/services/authcheck.dart';
 import 'pages/signup_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: const Authcheck(),
+      home: const AuthCheck(),
       routes: {
         '/signup': (context) => const SignupPage(),
         '/homepage':(context) => const HomePage(),

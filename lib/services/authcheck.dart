@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:tripster/pages/home_page.dart';
 import 'package:tripster/pages/login_page.dart';
 
-class Authcheck extends StatelessWidget {
-  const Authcheck({super.key});
+class AuthCheck extends StatelessWidget {
+  const AuthCheck({super.key});
 
   @override
   Widget build(BuildContext context) {
