@@ -24,38 +24,35 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   Future<void> _signUp() async {
-    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      // Get email and password values
-      final email = _emailController.text;
-      final password = _passwordController.text;
+  try {
+    // Get email and password values from the form
+    final email = _emailController.text;
+    final password = _passwordController.text;
 
-      try {
-        // Sign up the user
-        final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
+    // Create a new user with the email and password
+    final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
 
-        // Handle successful signup (e.g., navigate to home page)
-        print('Signed up successfully with UID: ${userCredential.user!.uid}');
-        Navigator.pushNamed(context, '/HomePage');
+    // Successful signup
+    
 
-        // Consider:
-        // - Implement email verification for enhanced security
-        // - Store additional user information in a database
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'weak-password') {
-          print('The password provided is too weak.');
-        } else if (e.code == 'email-already-in-use') {
-          print('The account already exists for that email.');
-        } else {
-          print('Signup failed with code: ${e.code}');
-        }
-      } catch (e) {
-        print('An error occurred: $e');
-      }
+    // Handle successful signup (e.g., navigate to home page)
+    Navigator.pushNamed(context, '/homepage');
+
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'weak-password') {
+      print('The password provided is too weak.');
+    } else if (e.code == 'email-already-in-use') {
+      print('The account already exists for that email.');
+    } else {
+      print('Signup failed with code: ${e.code}');
     }
+  } catch (e) {
+    print('An error occurred: $e');
   }
+}
 
   @override
   Widget build(BuildContext context) {
