@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   final _searchFieldController = TextEditingController();
 
   late GooglePlace googlePlace;
-  List<AutocompletePrediction> pred = [];
+  List<AutocompletePrediction> predictions= [];
   Timer? _debounce;
 
   @override
@@ -35,9 +35,9 @@ class _HomePageState extends State<HomePage> {
   void autocompleteSearch(String value)async{
     var result =await googlePlace.autocomplete.get(value);
     if ( result!= null &&result.predictions!=null && mounted){
-      print(result.predictions!.first.description);
+      
       setState(() {
-        pred = result.predictions!;
+        predictions = result.predictions!;
       });
     }
   }
@@ -83,6 +83,15 @@ class _HomePageState extends State<HomePage> {
                 }
               },
             ),
+
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: predictions.length,
+              itemBuilder: (context, index){
+                return ListTile(
+                  title: Text(predictions[index].description.toString(),),
+                );
+            })
           ],
         ),
       ),
