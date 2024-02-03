@@ -43,9 +43,37 @@ class _SignupPageState extends State<SignupPage> {
 
   } on FirebaseAuthException catch (e) {
     if (e.code == 'weak-password') {
-      print('The password provided is too weak.');
+      showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text("Alert"),
+        content: Text("Password is too weak"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("Close"),
+          ),
+        ],
+      );
+    },
+  );;
     } else if (e.code == 'email-already-in-use') {
-      print('The account already exists for that email.');
+      showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text("Alert"),
+        content: Text("Email already in use\nPlease try another email"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("Close"),
+          ),
+        ],
+      );
+    },
+  );
     } else {
       print('Signup failed with code: ${e.code}');
     }

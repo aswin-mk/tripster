@@ -35,9 +35,39 @@ void signin(BuildContext context, String email, String password) async {
   } on FirebaseAuthException catch (e) {
     // Handle sign-in errors
     if (e.code == 'user-not-found') {
-      print('No user found with that email.');
+      showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text("Alert"),
+        content: Text("User not found\nTry logging in with a valid email id"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("Close"),
+          ),
+        ],
+      );
+    },
+  );
     } else if (e.code == 'wrong-password') {
-      print('Wrong password provided for that user.');
+      showDialog(
+    context: context,
+    builder: (context) {
+      return Center(
+        child: AlertDialog(
+          title: Text("Alert"),
+          content: Text("Wrong password\nTry again"),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text("Close"),
+            ),
+          ],
+        ),
+      );
+    },
+  );
     } else {
       print(e.message);
     }
