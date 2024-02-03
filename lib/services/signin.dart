@@ -54,17 +54,15 @@ void signin(BuildContext context, String email, String password) async {
       showDialog(
     context: context,
     builder: (context) {
-      return Center(
-        child: AlertDialog(
-          title: Text("Alert"),
-          content: Text("Wrong password\nTry again"),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text("Close"),
-            ),
-          ],
-        ),
+      return AlertDialog(
+        title: Text("Alert"),
+        content: Text("Wrong password\nTry again"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("Close"),
+          ),
+        ],
       );
     },
   );
