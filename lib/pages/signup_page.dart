@@ -3,6 +3,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tripster/services/signup.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -23,74 +24,7 @@ class _SignupPageState extends State<SignupPage> {
     super.dispose();
   }
 
-  Future<void> _signUp() async {
-  try {
-    showDialog(
-      context: context, 
-      builder: (context){
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-    }
-    );
-    // Get email and password values from the form
-    final email = _emailController.text;
-    final password = _passwordController.text;
-
-    // Create a new user with the email and password
-    final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-
-    // Successful signup
-    
-
-    // Handle successful signup (e.g., navigate to home page)
-    Navigator.pop(context);
-    Navigator.pushNamed(context, '/homepage');
-
-  } on FirebaseAuthException catch (e) {
-    Navigator.pop(context);
-    if (e.code == 'weak-password') {
-      showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: Text("Alert"),
-        content: Text("Password is too weak"),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text("Close"),
-          ),
-        ],
-      );
-    },
-  );;
-    } else if (e.code == 'email-already-in-use') {
-      showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: Text("Alert"),
-        content: Text("Email already in use\nPlease try another email"),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text("Close"),
-          ),
-        ],
-      );
-    },
-  );
-    } else {
-      print('Signup failed with code: ${e.code}');
-    }
-  } catch (e) {
-    print('An error occurred: $e');
-  }
-}
+  
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +114,12 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
-                onPressed: _signUp,
+                onPressed: (){
+                  // Get email and password values from the form
+                  final email = _emailController.text;
+                  final password = _passwordController.text;
+                  SignUp(context, email, password);
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFFF5E9C9),
                   shape: RoundedRectangleBorder(
