@@ -25,6 +25,14 @@ class _SignupPageState extends State<SignupPage> {
 
   Future<void> _signUp() async {
   try {
+    showDialog(
+      context: context, 
+      builder: (context){
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+    }
+    );
     // Get email and password values from the form
     final email = _emailController.text;
     final password = _passwordController.text;
@@ -39,9 +47,11 @@ class _SignupPageState extends State<SignupPage> {
     
 
     // Handle successful signup (e.g., navigate to home page)
+    Navigator.pop(context);
     Navigator.pushNamed(context, '/homepage');
 
   } on FirebaseAuthException catch (e) {
+    Navigator.pop(context);
     if (e.code == 'weak-password') {
       showDialog(
     context: context,

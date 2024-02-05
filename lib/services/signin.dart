@@ -9,14 +9,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 void signin(BuildContext context, String email, String password) async {
   try {
 
-    showDialog(
-      context: context, 
-      builder: (context){
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-    }
-    );
+    
 
     final UserCredential userCredential = await _auth.signInWithEmailAndPassword(
       email: email,
@@ -33,6 +26,7 @@ void signin(BuildContext context, String email, String password) async {
       Navigator.pushNamed(context, '/homepage');
     }
   } on FirebaseAuthException catch (e) {
+    Navigator.pop(context);
     // Handle sign-in errors
     if (e.code == 'user-not-found') {
       showDialog(
@@ -40,7 +34,7 @@ void signin(BuildContext context, String email, String password) async {
     builder: (context) {
       return AlertDialog(
         title: Text("Alert"),
-        content: Text("User not found\nTry logging in with a valid email id"),
+        content: Text("User not found"),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -67,7 +61,15 @@ void signin(BuildContext context, String email, String password) async {
     },
   );
     } else {
-      print(e.message);
+      showDialog(context: context, builder: (context){
+          return AlertDialog(
+            title: Text("Alert"),
+            content: Text("An error occured"),
+            actions: [
+              TextButton(onPressed: () => Navigator.pop(context), child: Text("Close"))
+            ],
+          );
+      });
     }
   }
 }

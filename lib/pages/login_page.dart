@@ -101,6 +101,16 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () {
+                    
+                    showDialog(
+      context: context, 
+      builder: (context){
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+    }
+    );
+
                     signin(context,_emailController.text, _passwordController.text);
                   },
                   style: ElevatedButton.styleFrom(
