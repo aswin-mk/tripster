@@ -12,14 +12,16 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool passwordObsucretest = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xFF6FB9A9),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
+      backgroundColor: const Color(0xFF6FB9A9),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -66,21 +68,31 @@ class _LoginPageState extends State<LoginPage> {
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                     ),
+                    prefixIcon: Icon(Icons.email),
                   ),
                   style: const TextStyle(color: Colors.white),
                 ),
                 const SizedBox(height: 16.0),
                 TextField(
                   controller: _passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
+                  obscureText: passwordObsucretest,
+                  decoration: InputDecoration(
                     labelText: 'Password',
-                    labelStyle: TextStyle(color: Colors.white),
-                    enabledBorder: UnderlineInputBorder(
+                    labelStyle: const TextStyle(color: Colors.white),
+                    enabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                     ),
-                    focusedBorder: UnderlineInputBorder(
+                    focusedBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
+                    ),
+                    prefixIcon: const Icon(Icons.lock),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          passwordObsucretest = !passwordObsucretest;
+                        });
+                      },
+                      icon: const Icon(Icons.visibility_off),
                     ),
                   ),
                   style: const TextStyle(color: Colors.white),
@@ -101,17 +113,16 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () {
-                    
                     showDialog(
-      context: context, 
-      builder: (context){
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-    }
-    );
+                        context: context,
+                        builder: (context) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        });
 
-                    signin(context,_emailController.text, _passwordController.text);
+                    signin(context, _emailController.text,
+                        _passwordController.text);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFF5E9C9),
@@ -177,6 +188,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
-      );
+      ),
+    );
   }
 }
