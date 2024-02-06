@@ -1,5 +1,6 @@
 // login.dart
 import 'package:flutter/material.dart';
+import 'package:tripster/pages/forgot_password_page.dart';
 import 'package:tripster/services/signin.dart';
 
 class LoginPage extends StatefulWidget {
@@ -102,7 +103,14 @@ class _LoginPageState extends State<LoginPage> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      // TODO: implement forgot password logic
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return ForgotPasswordPage();
+                          },
+                        ),
+                      );
                     },
                     child: const Text(
                       'Forgot password?',
