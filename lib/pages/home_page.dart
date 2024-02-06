@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   void signUserOut(BuildContext context) {
     FirebaseAuth.instance.signOut();
     Navigator.of(context).pop();
+    Navigator.pushNamed(context, '/signin');
   }
 
   void autocompleteSearch(String value)async{

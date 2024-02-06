@@ -1,6 +1,7 @@
 // main.dart
 import 'package:flutter/material.dart';
 import 'package:tripster/pages/home_page.dart';
+import 'package:tripster/pages/login_page.dart';
 import 'package:tripster/services/authcheck.dart';
 import 'pages/signup_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/signup': (context) => const SignupPage(),
         '/homepage':(context) => const HomePage(),
-      },
+        '/signin': (context) => const LoginPage()      },
     );
   }
 }
