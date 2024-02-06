@@ -33,12 +33,12 @@ void signin(BuildContext context, String email, String password) async {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: Text("Alert"),
-        content: Text("User not found"),
+        title: const Text("Alert"),
+        content: const Text("User not found"),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text("Close"),
+            child: const Text("Close"),
           ),
         ],
       );
@@ -49,12 +49,12 @@ void signin(BuildContext context, String email, String password) async {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: Text("Alert"),
-        content: Text("Wrong password. Try again"),
+        title: const Text("Alert"),
+        content: const Text("Wrong password. Try again"),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text("Close"),
+            child: const Text("Close"),
           ),
         ],
       );
@@ -63,10 +63,10 @@ void signin(BuildContext context, String email, String password) async {
     } else {
       showDialog(context: context, builder: (context){
           return AlertDialog(
-            title: Text("Alert"),
-            content: Text("An error occured"),
+            title: const Text("Alert"),
+            content: const Text("An error occured"),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(context), child: Text("Close"))
+              TextButton(onPressed: () => Navigator.pop(context), child: const Text("Close"))
             ],
           );
       });
