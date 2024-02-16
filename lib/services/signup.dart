@@ -1,83 +1,185 @@
-
-
-
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
+
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:flutter/material.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-Future<void> SignUp(BuildContext context,String email,String password) async {
-  try {
-    showDialog(
-      context: context, 
-      builder: (context){
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-    }
-    );
-    
 
-    // Create a new user with the email and password
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
 
-    // Successful signup
-    
+Future<void> SignUp(BuildContext context, String email, String password, String username) async {
 
-    // Handle successful signup (e.g., navigate to home page)
-    Navigator.pop(context);
-    Navigator.pushNamed(context, '/homepage');
+ try {
 
-  } on FirebaseAuthException catch (e) {
-    Navigator.pop(context);
-    if (e.code == 'weak-password') {
-      showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: Text("Alert"),
-        content: Text("Password is too weak"),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text("Close"),
-          ),
-        ],
-      );
-    },
-  );;
-    } else if (e.code == 'email-already-in-use') {
-      showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        
-        title: Text("Alert"),
-        content: Text("Email already in use\nPlease try another email"),
-        actions: [
-          Center(
-            child: TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text("Close"),
-            ),
-          ),
-        ],
-      );
-    },
+  showDialog(
+
+   context: context,
+
+   builder: (context) => const Center(child: CircularProgressIndicator()),
+
   );
-    } else {
-      print('Signup failed with code: ${e.code}');
-    }
-  } catch (e) {
-    print('An error occurred: $e');
+
+
+
+  // Check for username availability
+
+  final usernameQuerySnapshot = await _firestore
+
+    .collection('users')
+
+    .where('username', isEqualTo: username)
+
+    .get();
+
+
+
+  if (usernameQuerySnapshot.docs.isNotEmpty) {
+
+   // Username already exists, show an error message
+
+   Navigator.pop(context);
+
+   ScaffoldMessenger.of(context).showSnackBar(
+
+    const SnackBar(content: Text('Username already taken')),
+
+   );
+
+   return;
+
   }
+
+
+
+  // Create user in Firebase Authentication
+
+  await FirebaseAuth.instance.createUserWithEmailAndPassword(
+
+   email: email,
+
+   password: password,
+
+  );
+
+
+
+  // Create user document in Firestore with unique username
+
+  await _firestore.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).set({
+
+   'username': username,
+
+   'email': email,
+
+  });
+
+
+
+  // Handle successful signup (e.g., navigate to home page)
+
+  Navigator.pop(context);
+
+  Navigator.pushNamed(context, '/homepage');
+
+ } on FirebaseAuthException catch (e) {
+
+    Navigator.pop(context);
+
+    if (e.code == 'weak-password') {
+
+      showDialog(
+
+    context: context,
+
+    builder: (context) {
+
+      return AlertDialog(
+
+        title: Text("Alert"),
+
+        content: Text("Password is too weak"),
+
+        actions: [
+
+          TextButton(
+
+            onPressed: () => Navigator.pop(context),
+
+            child: Text("Close"),
+
+          ),
+
+        ],
+
+      );
+
+    },
+
+  );;
+
+    } else if (e.code == 'email-already-in-use') {
+
+      showDialog(
+
+    context: context,
+
+    builder: (context) {
+
+      return AlertDialog(
+
+        
+
+        title: Text("Alert"),
+
+        content: Text("Email already in use\nPlease try another email"),
+
+        actions: [
+
+          Center(
+
+            child: TextButton(
+
+              onPressed: () => Navigator.pop(context),
+
+              child: Text("Close"),
+
+            ),
+
+          ),
+
+        ],
+
+      );
+
+    },
+
+  );
+
+    } else {
+
+      print('Signup failed with code: ${e.code}');
+
+    }
+
+  } catch (e) {
+    Navigator.pop(context);
+    showDialog(context: context, builder: (context){
+          return AlertDialog(
+            title: const Text("Alert"),
+            content: const Text("An error occured"),
+            actions: [
+              TextButton(onPressed: () => Navigator.pop(context), child: const Text("Close"))
+            ],
+          );
+      });
+
+  }
+
 }

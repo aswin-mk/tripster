@@ -1,7 +1,7 @@
 // signup.dart
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:tripster/services/signup.dart';
 
@@ -16,6 +16,8 @@ class _SignupPageState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+
   bool passwordObscuretest = true;
 
   @override
@@ -83,6 +85,22 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   style: const TextStyle(color: Colors.white),
                 ),
+                TextField(
+                  controller: _usernameController,
+                  keyboardType: TextInputType.name,
+                  decoration: const InputDecoration(
+                    labelText: 'Username',
+                    labelStyle: TextStyle(color: Colors.white),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    prefixIcon: Icon(Icons.email),
+                  ),
+                  style: const TextStyle(color: Colors.white),
+                ),
                 const SizedBox(height: 16.0),
                 TextField(
                   controller: _passwordController,
@@ -126,7 +144,8 @@ class _SignupPageState extends State<SignupPage> {
                     // Get email and password values from the form
                     final email = _emailController.text;
                     final password = _passwordController.text;
-                    SignUp(context, email, password);
+                    final username = _usernameController.text;
+                    SignUp(context, email, password,username);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFF5E9C9),

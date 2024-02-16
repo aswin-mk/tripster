@@ -30,7 +30,9 @@ class _HomePageState extends State<HomePage> {
   void signUserOut(BuildContext context) {
     FirebaseAuth.instance.signOut();
     Navigator.of(context).pop();
-    if (Navigator.of(context).canPop()) Navigator.pop(context);
+    while (Navigator.of(context).canPop()) {
+      Navigator.pop(context);
+    }
     Navigator.pushNamed(context, '/signin');
   }
 
