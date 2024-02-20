@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_place/google_place.dart';
+import 'package:tripster/pages/weather_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   final _searchFieldController = TextEditingController();
 
   late GooglePlace googlePlace;
-  List<AutocompletePrediction> predictions= [];
+  List<AutocompletePrediction> predictions = [];
   Timer? _debounce;
 
   @override
@@ -36,10 +37,9 @@ class _HomePageState extends State<HomePage> {
     Navigator.pushNamed(context, '/signin');
   }
 
-  void autocompleteSearch(String value)async{
-    var result =await googlePlace.autocomplete.get(value);
-    if ( result!= null &&result.predictions!=null && mounted){
-      
+  void autocompleteSearch(String value) async {
+    var result = await googlePlace.autocomplete.get(value);
+    if (result != null && result.predictions != null && mounted) {
       setState(() {
         predictions = result.predictions!;
       });
@@ -75,27 +75,38 @@ class _HomePageState extends State<HomePage> {
                 fillColor: Colors.grey[200],
                 border: InputBorder.none,
               ),
-              onChanged: (value){
+              onChanged: (value) {
                 if (_debounce?.isActive ?? false) _debounce!.cancel();
-                _debounce=Timer(const Duration(milliseconds: 1000), () {
-                  if (value.isNotEmpty){
-                  autocompleteSearch(value);
-                 }
-                 });
-                if (value.isNotEmpty){
+                _debounce = Timer(const Duration(milliseconds: 1000), () {
+                  if (value.isNotEmpty) {
+                    autocompleteSearch(value);
+                  }
+                });
+                if (value.isNotEmpty) {
                   autocompleteSearch(value);
                 }
               },
             ),
-
             ListView.builder(
-              shrinkWrap: true,
-              itemCount: predictions.length,
-              itemBuilder: (context, index){
-                return ListTile(
-                  title: Text(predictions[index].description.toString(),),
-                );
-            })
+                shrinkWrap: true,
+                itemCount: predictions.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(
+                      predictions[index].description.toString(),
+                    ),
+                  );
+                }),
+            ElevatedButton(
+              onPressed: () {
+                // TODO: implement sign up logic
+                Navigator.pushNamed(context, '/weatherpage');
+              },
+              child: const Text(
+                'weather',
+                style: TextStyle(color: Color.fromARGB(255, 25, 28, 177)),
+              ),
+            )
           ],
         ),
       ),

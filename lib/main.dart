@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:tripster/pages/home_page.dart';
 import 'package:tripster/pages/login_page.dart';
+import 'package:tripster/pages/weather_page.dart';
 import 'package:tripster/services/authcheck.dart';
 import 'pages/signup_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -13,10 +14,8 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(
-    const MyApp());
+  runApp(const MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -34,8 +33,10 @@ class MyApp extends StatelessWidget {
       home: const AuthCheck(),
       routes: {
         '/signup': (context) => const SignupPage(),
-        '/homepage':(context) => const HomePage(),
-        '/signin': (context) => const LoginPage()      },
+        '/homepage': (context) => const HomePage(),
+        '/signin': (context) => const LoginPage(),
+        '/weatherpage': (context) => const weatherPage()
+      },
     );
   }
 }
