@@ -14,7 +14,7 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 
 
-Future<void> SignUp(BuildContext context, String email, String password, String username) async {
+Future<void> SignUp(BuildContext context, String email, String password) async {
 
  try {
 
@@ -30,31 +30,31 @@ Future<void> SignUp(BuildContext context, String email, String password, String 
 
   // Check for username availability
 
-  final usernameQuerySnapshot = await _firestore
+  // final usernameQuerySnapshot = await _firestore
 
-    .collection('users')
+  //   .collection('users')
 
-    .where('username', isEqualTo: username)
+  //   .where('username', isEqualTo: username)
 
-    .get();
+  //   .get();
 
 
 
-  if (usernameQuerySnapshot.docs.isNotEmpty) {
+  // if (usernameQuerySnapshot.docs.isNotEmpty) {
 
-   // Username already exists, show an error message
+  //  // Username already exists, show an error message
 
-   Navigator.pop(context);
+  //  Navigator.pop(context);
 
-   ScaffoldMessenger.of(context).showSnackBar(
+  //  ScaffoldMessenger.of(context).showSnackBar(
 
-    const SnackBar(content: Text('Username already taken')),
+  //   const SnackBar(content: Text('Username already taken')),
 
-   );
+  //  );
 
-   return;
+  //  return;
 
-  }
+  // }
 
 
 
@@ -72,13 +72,7 @@ Future<void> SignUp(BuildContext context, String email, String password, String 
 
   // Create user document in Firestore with unique username
 
-  await _firestore.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).set({
-
-   'username': username,
-
-   'email': email,
-
-  });
+  
 
 
 
@@ -86,7 +80,7 @@ Future<void> SignUp(BuildContext context, String email, String password, String 
 
   Navigator.pop(context);
 
-  Navigator.pushNamed(context, '/homepage');
+  Navigator.pushNamed(context, '/createprofilepage');
 
  } on FirebaseAuthException catch (e) {
 
@@ -102,9 +96,9 @@ Future<void> SignUp(BuildContext context, String email, String password, String 
 
       return AlertDialog(
 
-        title: Text("Alert"),
+        title: const Text("Alert"),
 
-        content: Text("Password is too weak"),
+        content: const Text("Password is too weak"),
 
         actions: [
 
@@ -112,7 +106,7 @@ Future<void> SignUp(BuildContext context, String email, String password, String 
 
             onPressed: () => Navigator.pop(context),
 
-            child: Text("Close"),
+            child: const Text("Close"),
 
           ),
 
@@ -122,7 +116,7 @@ Future<void> SignUp(BuildContext context, String email, String password, String 
 
     },
 
-  );;
+  );
 
     } else if (e.code == 'email-already-in-use') {
 
@@ -136,9 +130,9 @@ Future<void> SignUp(BuildContext context, String email, String password, String 
 
         
 
-        title: Text("Alert"),
+        title: const Text("Alert"),
 
-        content: Text("Email already in use\nPlease try another email"),
+        content: const Text("Email already in use\nPlease try another email"),
 
         actions: [
 
@@ -148,7 +142,7 @@ Future<void> SignUp(BuildContext context, String email, String password, String 
 
               onPressed: () => Navigator.pop(context),
 
-              child: Text("Close"),
+              child: const Text("Close"),
 
             ),
 

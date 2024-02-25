@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_place/google_place.dart';
-import 'package:tripster/pages/weather_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -51,6 +50,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         actions: [
+          IconButton(
+          icon: const Icon(Icons.person),
+          onPressed:  () {
+            Navigator.pushNamed(context, '/userdetailspage');
+          },
+        ),
           IconButton(
             onPressed: () => signUserOut(context),
             icon: const Icon(Icons.logout),

@@ -1,7 +1,9 @@
 // main.dart
 import 'package:flutter/material.dart';
+import 'package:tripster/pages/createprofile_page.dart';
 import 'package:tripster/pages/home_page.dart';
 import 'package:tripster/pages/login_page.dart';
+import 'package:tripster/pages/userdetails_page.dart';
 import 'package:tripster/pages/weather_page.dart';
 import 'package:tripster/services/authcheck.dart';
 import 'pages/signup_page.dart';
@@ -35,7 +37,9 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => const SignupPage(),
         '/homepage': (context) => const HomePage(),
         '/signin': (context) => const LoginPage(),
-        '/weatherpage': (context) => const weatherPage()
+        '/weatherpage': (context) => const weatherPage(),
+        '/createprofilepage':(context) => const CreateProfile(),
+        '/userdetailspage':(context) =>  const UserDetails()
       },
     );
   }

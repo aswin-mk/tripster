@@ -145,7 +145,7 @@ class _SignupPageState extends State<SignupPage> {
                     final email = _emailController.text;
                     final password = _passwordController.text;
                     final username = _usernameController.text;
-                    SignUp(context, email, password,username);
+                    SignUp(context, email, password);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFF5E9C9),
@@ -157,7 +157,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
                 const SizedBox(height: 16.0),
                 const Text(
-                  'Or sign up with',
+                  'Or sign up with', 
                   style: TextStyle(color: Colors.white),
                 ),
                 const SizedBox(height: 16.0),
