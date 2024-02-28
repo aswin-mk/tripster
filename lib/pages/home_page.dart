@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_place/google_place.dart';
+//import 'package:google_place/google_place.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,15 +16,15 @@ class _HomePageState extends State<HomePage> {
 
   final _searchFieldController = TextEditingController();
 
-  late GooglePlace googlePlace;
-  List<AutocompletePrediction> predictions = [];
+  // late GooglePlace googlePlace;
+  // List<AutocompletePrediction> predictions = [];
   Timer? _debounce;
 
   @override
   void initState() {
     super.initState();
     String apikey = 'AIzaSyCv7HfxioHkM9jUm28YUOLKKB7JfWz5N0s';
-    googlePlace = GooglePlace(apikey);
+    //googlePlace = GooglePlace(apikey);
   }
 
   void signUserOut(BuildContext context) {
@@ -37,12 +37,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   void autocompleteSearch(String value) async {
-    var result = await googlePlace.autocomplete.get(value);
-    if (result != null && result.predictions != null && mounted) {
-      setState(() {
-        predictions = result.predictions!;
-      });
-    }
+    // var result = await googlePlace.autocomplete.get(value);
+    // if (result != null && result.predictions != null && mounted) {
+    //   setState(() {
+    //     //predictions = result.predictions!;
+    //   });
+    // }
   }
 
   @override
@@ -92,16 +92,16 @@ class _HomePageState extends State<HomePage> {
                 }
               },
             ),
-            ListView.builder(
-                shrinkWrap: true,
-                itemCount: predictions.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(
-                      predictions[index].description.toString(),
-                    ),
-                  );
-                }),
+            // ListView.builder(
+            //     shrinkWrap: true,
+            //     itemCount: predictions.length,
+            //     itemBuilder: (context, index) {
+            //       return ListTile(
+            //         title: Text(
+            //           predictions[index].description.toString(),
+            //         ),
+            //       );
+            //     }),
             ElevatedButton(
               onPressed: () {
                 // TODO: implement sign up logic
@@ -109,6 +109,16 @@ class _HomePageState extends State<HomePage> {
               },
               child: const Text(
                 'weather',
+                style: TextStyle(color: Color.fromARGB(255, 25, 28, 177)),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // TODO: implement sign up logic
+                Navigator.pushNamed(context, '/mappage');
+              },
+              child: const Text(
+                'map',
                 style: TextStyle(color: Color.fromARGB(255, 25, 28, 177)),
               ),
             )
