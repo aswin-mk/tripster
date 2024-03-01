@@ -17,10 +17,8 @@ class _UserDetailsState extends State<UserDetails> {
     super.initState();
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      _userData = FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .get();
+      _userData =
+          FirebaseFirestore.instance.collection('users').doc(user.uid).get();
     } else {
       // Handle the case where no user is signed in
       print('No user is currently signed in.');

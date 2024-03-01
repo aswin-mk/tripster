@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 
-Future<void> AddUser(String name,String gender,int phone,int age,BuildContext context)async {
-  
+Future<void> AddUser(String name, String gender, int phone, int age,
+    BuildContext context) async {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final User? user = auth.currentUser;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -21,6 +21,5 @@ Future<void> AddUser(String name,String gender,int phone,int age,BuildContext co
 
   await docRef.set(data);
 
-  Navigator.pushNamed(context, '/homepge');
-
+  Navigator.pushNamed(context, '/homepage');
 }

@@ -3,20 +3,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
 void signin(BuildContext context, String email, String password) async {
   try {
-
-    
-
-    final UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+    final UserCredential userCredential =
+        await _auth.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
-
-
 
     // Successful sign-in
     User? user = userCredential.user;
@@ -30,47 +25,50 @@ void signin(BuildContext context, String email, String password) async {
     // Handle sign-in errors
     if (e.code == 'user-not-found') {
       showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text("Alert"),
-        content: const Text("User not found"),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("Close"),
-          ),
-        ],
-      );
-    },
-  );
-    } else if (e.code == 'wrong-password') {
-      showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text("Alert"),
-        content: const Text("Wrong password. Try again"),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("Close"),
-          ),
-        ],
-      );
-    },
-  );
-    } else {
-      showDialog(context: context, builder: (context){
+        context: context,
+        builder: (context) {
           return AlertDialog(
             title: const Text("Alert"),
-            content: const Text("An error occured"),
+            content: const Text("User not found"),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(context), child: const Text("Close"))
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Close"),
+              ),
             ],
           );
-      });
+        },
+      );
+    } else if (e.code == 'wrong-password') {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Alert"),
+            content: const Text("Wrong password. Try again"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Close"),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text("Alert"),
+              content: const Text("An error occured"),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text("Close"))
+              ],
+            );
+          });
     }
   }
 }
-

@@ -51,11 +51,11 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         actions: [
           IconButton(
-          icon: const Icon(Icons.person),
-          onPressed:  () {
-            Navigator.pushNamed(context, '/userdetailspage');
-          },
-        ),
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              Navigator.pushNamed(context, '/userdetailspage');
+            },
+          ),
           IconButton(
             onPressed: () => signUserOut(context),
             icon: const Icon(Icons.logout),

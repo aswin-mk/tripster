@@ -130,13 +130,12 @@ class _CreateProfileState extends State<CreateProfile> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    AddUser (
-                      _nameController.text,
-                      gender!,
-                      int.parse(_ageController.text),
-                      int.parse(_phoneController.text),
-                      context
-                    );
+                    AddUser(
+                        _nameController.text,
+                        gender!,
+                        int.parse(_ageController.text),
+                        int.parse(_phoneController.text),
+                        context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFF5E9C9),

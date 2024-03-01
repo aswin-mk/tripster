@@ -3,14 +3,14 @@ import 'package:intl/intl.dart';
 import 'package:weather/weather.dart';
 //import 'package:weather_app_tutorial/consts.dart';
 
-class weatherPage extends StatefulWidget {
-  const weatherPage({super.key});
+class WeatherPage extends StatefulWidget {
+  const WeatherPage({super.key});
 
   @override
-  State<weatherPage> createState() => _HomePageState();
+  State<WeatherPage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<weatherPage> {
+class _HomePageState extends State<WeatherPage> {
   final WeatherFactory _wf = WeatherFactory("4fced7a67b33b80d79c969d67cab9205");
 
   Weather? _weather;

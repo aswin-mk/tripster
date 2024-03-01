@@ -1,7 +1,6 @@
 // signup.dart
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
-
 import 'package:flutter/material.dart';
 import 'package:tripster/services/signup.dart';
 
@@ -157,7 +156,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
                 const SizedBox(height: 16.0),
                 const Text(
-                  'Or sign up with', 
+                  'Or sign up with',
                   style: TextStyle(color: Colors.white),
                 ),
                 const SizedBox(height: 16.0),
