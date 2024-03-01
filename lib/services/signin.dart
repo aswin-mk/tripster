@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tripster/services/userexist.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -18,7 +19,11 @@ void signin(BuildContext context, String email, String password) async {
     Navigator.pop(context);
     if (user != null) {
       // Navigate to home screen or other relevant screen
-      Navigator.pushNamed(context, '/homepage');
+      if (UserExist() == 1) {
+              Navigator.push(context, '/homepage' as Route<Object?>);
+            } else {
+              Navigator.pushNamed(context, '/createprofiepage');
+            }
     }
   } on FirebaseAuthException catch (e) {
     Navigator.pop(context);

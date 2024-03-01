@@ -1,9 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-Future<void> AddUser(String name, String gender, int phone, int age,
-    BuildContext context) async {
+Future<void> AddUser(String name, String gender, int phone, int age,BuildContext context) async {
+
+  showDialog(
+      context: context,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
+
   final FirebaseAuth auth = FirebaseAuth.instance;
   final User? user = auth.currentUser;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -21,5 +27,6 @@ Future<void> AddUser(String name, String gender, int phone, int age,
 
   await docRef.set(data);
 
+  Navigator.pop(context);
   Navigator.pushNamed(context, '/homepage');
 }
